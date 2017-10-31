@@ -1,0 +1,38 @@
+/* -- reset -- */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 5px;
+  padding: 0;
+}
+
+/* -- temp -- */
+
+div, header, footer {
+  border: 1px solid black;
+}
+
+/*--main css--*/
+
+body {
+  font-family: 'Varela-Round', sans-serif;
+}
+
+#start {
+  text-align: center;
+}
+
+#gamename {
+  text-align: center;
+}
+
+#title h2 {
+  font-size: 15px;
+}

@@ -1,0 +1,62 @@
+/* -- reset -- */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Varela Round', sans-serif !important;
+}
+
+/* -- temp -- */
+
+div, header, footer, section {
+  border: 1px solid black;
+}
+
+/*--Main style--*/
+
+#title {
+  display: flex;
+  justify-content: center;
+  padding: 15%;
+}
+
+#title h1 {
+  font-size: 80px;
+  text-align: center;
+}
+
+#topic-section {
+  text-align: center;
+}
+
+#topic-section h2 {
+  font-size: 40px;
+  font-weight: lighter;
+}
+
+#choose-topic {
+  width: auto;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.start-game-btn {
+  color: white;
+  padding: 2%;
+  border-style: none;
+  border-radius: 10px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 295%;
+  background: rgb(66, 184, 221);
+}

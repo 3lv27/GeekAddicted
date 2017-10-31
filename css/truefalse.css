@@ -1,0 +1,40 @@
+.answers {
+  height: 260px;
+  padding: 17%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-asw {
+  color: white;
+  padding: 2%;
+  border-style: none;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 99%;
+  background: rgb(66, 184, 221);
+}
+
+#succed {
+  background-image: url("paper.gif");
+}
+
+#failed {
+  height: 170px;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../img/wrong-britney.gif");
+}
+
+#succeed {
+  height: 240px;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../img/right-oldman.gif");
+}

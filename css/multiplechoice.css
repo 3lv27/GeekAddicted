@@ -1,0 +1,17 @@
+.answers {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.answers>button {
+  margin-left: 10px;
+
+}
+
+.active {
+  background-color: blue;
+  color: white;
+}
