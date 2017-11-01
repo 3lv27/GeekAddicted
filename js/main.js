@@ -1,8 +1,9 @@
-function CreateQuizz() {
-  this.something =
-    this.something
+'use strict';
+
+function main() {
+  var container = document.getElementById('game-container');
+  var game = new Game(container, questions);
+  game.buildStart();
 }
 
-CreateQuizz.prototype.startGame = function() {
-
-}
+window.addEventListener('DOMContentLoaded', main);

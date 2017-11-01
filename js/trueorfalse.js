@@ -1,60 +1,94 @@
 'use strict';
 
 function TrueOrFalse (data, parentElement) {
+  var self = this;
 
-    this.data = data;
-    this.parentElement = parentElement;
+    self.data = data;
+    self.parentElement = parentElement;
 
-    this.userAnswer = [];
+    self.title = null;
+    self.question = null;
+    self.answers = null;
 
-    this.renderTitle();
-    this.renderQuestion();
+    self.userAnswer = null;
 
-
-
-
+    self.renderTitle();
+    self.renderQuestion();
+    self.renderAnswer();
 }
+
+TrueOrFalse.prototype.bindAnswer = function(callback) {
+  var self = this;
+  self.callback = callback;
+};
 
 
 
 TrueOrFalse.prototype.renderTitle = function () {
+  var self = this;
 
-  var title = document.createElement('header');
-  title.id = 'title';
+  self.title = document.createElement('header');
+  self.title.id = 'title';
 
   var titleText = document.createElement('h2');
   titleText.innerText = 'True or False';
-  title.appendChild(titleText);
-  this.parentElement.appendChild(title);
+  self.title.appendChild(titleText);
+  self.parentElement.appendChild(self.title);
 };
 
 TrueOrFalse.prototype.renderQuestion = function () {
+  var self = this;
 
-  var question = document.createElement('div');
-  question.id = 'question';
+  self.question = document.createElement('div');
+  self.question.id = 'question';
   var questionText = document.createElement('h3');
-  questionText.innerText = this.data.question;
-  question.appendChild(questionText);
+  questionText.innerText = self.data.question;
+  self.question.appendChild(questionText);
 
-  this.parentElement.appendChild(question);
+  self.parentElement.appendChild(self.question);
 };
 
 TrueOrFalse.prototype.renderAnswer = function () {
+  var self = this;
 
-  var answers = document.createElement('div');
-  answers.classList.add('answers');
-  this.parentElement.appendChild(answers);
+  self.answers = document.createElement('div');
+  self.answers.classList.add('answers');
+  self.parentElement.appendChild(self.answers);
 
-  for (var i = 0; i < this.data.options.length; i++) {
+  for (var i = 0; i < self.data.options.length; i++) {
 
     var button = document.createElement('button');
-    button.innerText = this.data.options[i];
-    answers.appendChild(button);
+    button.innerText = self.data.options[i];
+    self.answers.appendChild(button);
 
     button.addEventListener('click', function(event) {
-      this.handleAnswerClick(event);
+      self.handleAnswerClick(event);
     });
   }
 };
 
-TrueOrFalse.prototype
+
+TrueOrFalse.prototype.handleAnswerClick = function (event) {
+  var self = this;
+
+  var button = event.currentTarget;
+  button.classList.toggle('active');
+  self.userAnswer = event.currentTarget.innerText;
+
+  function getResult () {
+    return self.userAnswer === self.data.solution;
+  }
+
+  self.callback(getResult());
+  self.destroy();
+};
+
+
+
+TrueOrFalse.prototype.destroy = function () {
+  var self = this;
+
+  self.parentElement.removeChild(self.title);
+  self.parentElement.removeChild(self.question);
+  self.parentElement.removeChild(self.answers);
+};

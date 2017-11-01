@@ -36,3 +36,21 @@ body {
 #title h2 {
   font-size: 15px;
 }
+
+#failed {
+  height: 270px;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../img/wrong-britney.gif");
+}
+
+#succeed {
+  height: 380px;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../img/right-oldman.gif");
+}

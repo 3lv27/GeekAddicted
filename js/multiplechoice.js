@@ -6,8 +6,10 @@ function MultipleChoice(data, parentElement) {
   self.data = data;
   self.parentElement = parentElement;
 
-  self.title;
-  self.answer;
+  self.title = null;
+  self.question = null;
+  self.answers = null;
+  self.submit = null;
 
   self.userAnswer = [];
 
@@ -29,7 +31,7 @@ MultipleChoice.prototype.renderTitle = function() {
   self.title.id = 'title';
 
   var titleText = document.createElement('h2');
-  titleText.innerText = 'Select the correct ones';
+  titleText.innerText = self.data.title;
   self.title.appendChild(titleText);
   self.parentElement.appendChild(self.title);
 };
@@ -37,13 +39,13 @@ MultipleChoice.prototype.renderTitle = function() {
 MultipleChoice.prototype.renderQuestion = function() {
   var self = this;
 
-  var question = document.createElement('div');
-  question.id = 'question';
+  self.question = document.createElement('div');
+  self.question.id = 'question';
   var questionText = document.createElement('h3');
   questionText.innerText = self.data.question;
-  question.appendChild(questionText);
+  self.question.appendChild(questionText);
 
-  self.parentElement.appendChild(question);
+  self.parentElement.appendChild(self.question);
 };
 
 MultipleChoice.prototype.renderAnswer = function() {
@@ -53,10 +55,10 @@ MultipleChoice.prototype.renderAnswer = function() {
   self.answers.classList.add('answers');
   self.parentElement.appendChild(self.answers);
 
+
   for (var index = 0; index < self.data.options.length; index++) {
 
     var button = document.createElement('button');
-    //button.setAttribute('type', 'button');
     button.innerText = self.data.options[index];
     self.answers.appendChild(button);
 
@@ -83,10 +85,13 @@ MultipleChoice.prototype.handleAnswerClick = function(event) {
 MultipleChoice.prototype.renderSubmit = function() {
   var self = this;
 
-  var submit = document.createElement('button');
-  submit.id = 'submit-btn';
-  submit.innerText = 'submit';
-  self.parentElement.appendChild(submit);
+  self.submit = document.createElement('div');
+  self.submit.id = 'submit';
+  self.parentElement.appendChild(self.submit);
+  var submitBtn = document.createElement('button');
+  submitBtn.id = 'submit-btn';
+  submitBtn.innerText = 'submit';
+  self.submit.appendChild(submitBtn);
 
   function getResult () {
 
@@ -101,20 +106,20 @@ MultipleChoice.prototype.renderSubmit = function() {
           return false;
        }
      }
-     return self.correctAnswer();
+     return true;
    }
 
-  submit.addEventListener('click', function() {
-    console.log(self.userAnswer);
+  submitBtn.addEventListener('click', function() {
     self.callback(getResult());
+    self.destroy();
   });
 };
 
-MultipleChoice.prototype.correctAnswer = function () {
+MultipleChoice.prototype.destroy = function () {
   var self = this;
-  var answers = document.getElementsByClassName('answers')
-  self.parentElement.removeChild(title);
-  self.parentElement.removeChild(question);
-  self.parentElement.removeChild(answers);
 
-}
+  self.parentElement.removeChild(self.title);
+  self.parentElement.removeChild(self.question);
+  self.parentElement.removeChild(self.answers);
+  self.parentElement.removeChild(self.submit);
+};
