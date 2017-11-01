@@ -54,3 +54,10 @@ body {
   background-repeat: no-repeat;
   background-image: url("../img/right-oldman.gif");
 }
+
+
+.timer-bar {
+  height: 20px;
+  width: 100%;
+  background-color: #44d6fa;
+}

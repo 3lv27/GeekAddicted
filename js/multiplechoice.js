@@ -1,10 +1,12 @@
 'use strict';
 
-function MultipleChoice(data, parentElement) {
+function MultipleChoice(data, questionIndex, parentElement) {
   var self = this;
 
   self.data = data;
   self.parentElement = parentElement;
+  self.currentQuestionIndex = questionIndex;
+
 
   self.title = null;
   self.question = null;
@@ -13,6 +15,7 @@ function MultipleChoice(data, parentElement) {
 
   self.userAnswer = [];
 
+  self.renderHeader();
   self.renderTitle();
   self.renderQuestion();
   self.renderAnswer();
@@ -24,10 +27,25 @@ MultipleChoice.prototype.bindAnswer = function(callback) {
   self.callback = callback;
 };
 
+MultipleChoice.prototype.renderHeader = function () {
+  var self = this;
+
+  var headerContainer = document.createElement('header');
+  headerContainer.id = 'header-container';
+  self.parentElement.appendChild(headerContainer)
+
+  var currentQuestionDiv = document.createElement('div');
+  currentQuestionDiv.id = 'current-question';
+  headerContainer.appendChild(currentQuestionDiv);
+  var currentQuestionNumber = document.createElement('p');
+  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / ${self.data.length}`;
+  currentQuestionDiv.appendChild(currentQuestionNumber);
+}
+
 MultipleChoice.prototype.renderTitle = function() {
   var self = this;
 
-  self.title = document.createElement('header');
+  self.title = document.createElement('div');
   self.title.id = 'title';
 
   var titleText = document.createElement('h2');

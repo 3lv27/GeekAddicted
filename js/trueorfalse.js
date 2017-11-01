@@ -1,10 +1,11 @@
 'use strict';
 
-function TrueOrFalse (data, parentElement) {
+function TrueOrFalse (data, questionIndex, parentElement) {
   var self = this;
 
     self.data = data;
     self.parentElement = parentElement;
+    self.currentQuestionIndex = questionIndex;
 
     self.title = null;
     self.question = null;
@@ -12,6 +13,7 @@ function TrueOrFalse (data, parentElement) {
 
     self.userAnswer = null;
 
+    self.renderHeader();
     self.renderTitle();
     self.renderQuestion();
     self.renderAnswer();
@@ -22,16 +24,31 @@ TrueOrFalse.prototype.bindAnswer = function(callback) {
   self.callback = callback;
 };
 
+TrueOrFalse.prototype.renderHeader = function () {
+  var self = this;
+
+  var headerContainer = document.createElement('header');
+  headerContainer.id = 'header-container';
+  self.parentElement.appendChild(headerContainer)
+
+  var currentQuestionDiv = document.createElement('div');
+  currentQuestionDiv.id = 'current-question';
+  headerContainer.appendChild(currentQuestionDiv);
+  var currentQuestionNumber = document.createElement('p');
+  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / ${self.data.length}`;
+  currentQuestionDiv.appendChild(currentQuestionNumber);
+}
+
 
 
 TrueOrFalse.prototype.renderTitle = function () {
   var self = this;
 
-  self.title = document.createElement('header');
+  self.title = document.createElement('div');
   self.title.id = 'title';
 
   var titleText = document.createElement('h2');
-  titleText.innerText = 'True or False';
+  titleText.innerText = self.data.title;
   self.title.appendChild(titleText);
   self.parentElement.appendChild(self.title);
 };
