@@ -12,10 +12,20 @@ function Game(parentElement, questions) {
   self.timerBar = null;
   self.timeOutInterval = null;
 
+  self.headerContainer = null;
+  self.scoreDiv = null;
+
+  self.totalScore = 0;
+  self.rightAnswers = 0;
+  self.wrongAnswers = 0;
+
+
   // @todo increment score
 
 
 }
+
+
 
 Game.prototype.buildStart = function() {
   var self = this;
@@ -40,8 +50,10 @@ Game.prototype.buildStart = function() {
     self.parentElement.removeChild(gameName);
     self.parentElement.removeChild(startDiv);
     //self.headerGame();
+
     self.prepareGame();
     self.nextQuestion();
+
 
   });
 
@@ -84,6 +96,65 @@ Game.prototype.prepareGame = function () {
   console.log('prepare the game');
 };
 
+
+Game.prototype.renderHeader = function () {
+  var self = this;
+
+  self.headerContainer = document.createElement('div');
+  self.headerContainer.id = 'header-container';
+  self.parentElement.appendChild(self.headerContainer);
+
+  var currentQuestionDiv = document.createElement('div');
+  currentQuestionDiv.id = 'current-question';
+  self.headerContainer.appendChild(currentQuestionDiv);
+  var currentQuestionNumber = document.createElement('p');
+  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / ${self.questions.length}`;
+  currentQuestionDiv.appendChild(currentQuestionNumber);
+
+  var pointsDiv = document.createElement('div');
+  pointsDiv.id = 'points-container';
+  self.headerContainer.appendChild(pointsDiv);
+  var winningPoints = document.createElement('p');
+  winningPoints.innerText = `Winnings: ${self.questions[self.currentQuestionIndex].points}`;
+  pointsDiv.appendChild(winningPoints);
+  var lossesPoints = document.createElement('div');
+  lossesPoints.innerText += `Losses: ${self.questions[self.currentQuestionIndex].points + 2}`;
+  pointsDiv.appendChild(lossesPoints);
+}
+
+
+Game.prototype.renderScore = function () {
+  var self = this;
+
+  self.scoreDiv = document.createElement('div');
+  self.scoreDiv.id = 'score';
+  self.parentElement.appendChild(self.scoreDiv);
+
+  var wrongAnswers = document.createElement('div');
+  wrongAnswers.id = 'wrong-answers';
+  self.scoreDiv.appendChild(wrongAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = `X: ${self.wrongAnswers}`;
+  wrongAnswers.appendChild(numWrongAnswers);
+
+  var totalScoreDiv = document.createElement('div');
+  totalScoreDiv.id = 'total-score';
+  totalScoreDiv.innerText = `YOUR SCORE: ${self.totalScore}`;
+  self.scoreDiv.appendChild(totalScoreDiv);
+
+
+  var correctAnswers = document.createElement('div');
+  correctAnswers.id = 'correct-answers';
+  self.scoreDiv.appendChild(correctAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = `C: ${self.rightAnswers}`;
+  correctAnswers.appendChild(numWrongAnswers);
+
+
+}
+
+
+
 Game.prototype.nextQuestion = function () {
   var self = this;
   console.log('next question');
@@ -107,10 +178,16 @@ Game.prototype.nextQuestion = function () {
     var question;
     switch(data.type) {
       case 'MultipleChoice':
-        question = new MultipleChoice(data, self.currentQuestionIndex, self.parentElement);
+        self.renderHeader();
+        self.renderScore();
+        question = new MultipleChoice(data, self.headerContainer, self.scoreDiv, self.parentElement);
+
         break;
       case 'TrueFalse':
-        question = new TrueOrFalse(data, self.currentQuestionIndex, self.parentElement);
+        self.renderHeader();
+        self.renderScore();
+        question = new TrueOrFalse(data,self.headerContainer, self.scoreDiv, self.parentElement);
+
         break;
     }
 
@@ -170,6 +247,10 @@ Game.prototype.correctAnswer = function () {
 
   clearInterval(self.timeOutInterval);
 
+  self.rightAnswers++;
+  self.totalScore += self.questions[self.currentQuestionIndex].points;
+
+
   var succeed = document.createElement('div');
   succeed.id = 'succeed';
   self.parentElement.appendChild(succeed);
@@ -196,6 +277,9 @@ Game.prototype.wrongAnswer = function () {
   var self = this;
 
   clearInterval(self.timeOutInterval);
+
+  self.wrongAnswers++;
+  self.totalScore -= self.questions[self.currentQuestionIndex].points + 2;
 
   var failed = document.createElement('div');
   failed.id = 'failed';
@@ -239,6 +323,9 @@ Game.prototype.endGame = function () {
     self.parentElement.removeChild(endScreen);
     self.parentElement.removeChild(self.reset);
     self.currentQuestionIndex = null;
+    self.totalScore = 0;
+    self.rightAnswers = 0;
+    self.wrongAnswers = 0;
     self.prepareGame();
     self.nextQuestion();
   });

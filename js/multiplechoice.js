@@ -1,24 +1,26 @@
 'use strict';
 
-function MultipleChoice(data, questionIndex, parentElement) {
+function MultipleChoice(data, headerElement, scoreElement, parentElement) {
   var self = this;
 
   self.data = data;
   self.parentElement = parentElement;
-  self.currentQuestionIndex = questionIndex;
+  self.headerContainer = headerElement;
+  self.scoreDiv = scoreElement;
+
 
 
   self.title = null;
   self.question = null;
   self.answers = null;
   self.submit = null;
-  self.headerContainer = null;
-  self.scoreDiv = null;
+
+
 
   self.userAnswer = [];
 
-  self.renderHeader();
-  self.renderScore();
+  // self.renderHeader();
+  // self.renderScore();
   self.renderTitle();
   self.renderQuestion();
   self.renderAnswer();
@@ -30,61 +32,61 @@ MultipleChoice.prototype.bindAnswer = function(callback) {
   self.callback = callback;
 };
 
-MultipleChoice.prototype.renderHeader = function () {
-  var self = this;
-
-  self.headerContainer = document.createElement('header');
-  self.headerContainer.id = 'header-container';
-  self.parentElement.appendChild(self.headerContainer)
-
-  var currentQuestionDiv = document.createElement('div');
-  currentQuestionDiv.id = 'current-question';
-  self.headerContainer.appendChild(currentQuestionDiv);
-  var currentQuestionNumber = document.createElement('p');
-  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / 3`;
-  currentQuestionDiv.appendChild(currentQuestionNumber);
-
-  var pointsDiv = document.createElement('div');
-  pointsDiv.id = 'points-container';
-  self.headerContainer.appendChild(pointsDiv);
-  var winningPoints = document.createElement('p');
-  winningPoints.innerText = `Winnings: ${self.data.points}`;
-  pointsDiv.appendChild(winningPoints);
-  var lossesPoints = document.createElement('div');
-  lossesPoints.innerText += `Losses: ${self.data.points + 2}`;
-  pointsDiv.appendChild(lossesPoints);
-
-}
-
-MultipleChoice.prototype.renderScore = function () {
-  var self = this;
-
-  self.scoreDiv = document.createElement('div');
-  self.scoreDiv.id = 'score';
-  self.parentElement.appendChild(self.scoreDiv);
-
-  var wrongAnswers = document.createElement('div');
-  wrongAnswers.id = 'wrong-answers';
-  self.scoreDiv.appendChild(wrongAnswers);
-  var numWrongAnswers = document.createElement('p');
-  numWrongAnswers.innerText = 'X';
-  wrongAnswers.appendChild(numWrongAnswers);
-
-  var totalScoreDiv = document.createElement('div');
-  totalScoreDiv.id = 'total-score';
-  totalScoreDiv.innerText = 'YOUR SCORE'
-  self.scoreDiv.appendChild(totalScoreDiv);
-
-
-  var correctAnswers = document.createElement('div');
-  correctAnswers.id = 'correct-answers';
-  self.scoreDiv.appendChild(correctAnswers);
-  var numWrongAnswers = document.createElement('p');
-  numWrongAnswers.innerText = 'C';
-  correctAnswers.appendChild(numWrongAnswers);
-
-
-}
+// MultipleChoice.prototype.renderHeader = function () {
+//   var self = this;
+//
+//   self.headerContainer = document.createElement('header');
+//   self.headerContainer.id = 'header-container';
+//   self.parentElement.appendChild(self.headerContainer)
+//
+//   var currentQuestionDiv = document.createElement('div');
+//   currentQuestionDiv.id = 'current-question';
+//   self.headerContainer.appendChild(currentQuestionDiv);
+//   var currentQuestionNumber = document.createElement('p');
+//   currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / 3`;
+//   currentQuestionDiv.appendChild(currentQuestionNumber);
+//
+//   var pointsDiv = document.createElement('div');
+//   pointsDiv.id = 'points-container';
+//   self.headerContainer.appendChild(pointsDiv);
+//   var winningPoints = document.createElement('p');
+//   winningPoints.innerText = `Winnings: ${self.data.points}`;
+//   pointsDiv.appendChild(winningPoints);
+//   var lossesPoints = document.createElement('div');
+//   lossesPoints.innerText += `Losses: ${self.data.points + 2}`;
+//   pointsDiv.appendChild(lossesPoints);
+//
+// }
+//
+// MultipleChoice.prototype.renderScore = function () {
+//   var self = this;
+//
+//   self.scoreDiv = document.createElement('div');
+//   self.scoreDiv.id = 'score';
+//   self.parentElement.appendChild(self.scoreDiv);
+//
+//   var wrongAnswers = document.createElement('div');
+//   wrongAnswers.id = 'wrong-answers';
+//   self.scoreDiv.appendChild(wrongAnswers);
+//   var numWrongAnswers = document.createElement('p');
+//   numWrongAnswers.innerText = 'X';
+//   wrongAnswers.appendChild(numWrongAnswers);
+//
+//   var totalScoreDiv = document.createElement('div');
+//   totalScoreDiv.id = 'total-score';
+//   totalScoreDiv.innerText = 'YOUR SCORE'
+//   self.scoreDiv.appendChild(totalScoreDiv);
+//
+//
+//   var correctAnswers = document.createElement('div');
+//   correctAnswers.id = 'correct-answers';
+//   self.scoreDiv.appendChild(correctAnswers);
+//   var numWrongAnswers = document.createElement('p');
+//   numWrongAnswers.innerText = 'C';
+//   correctAnswers.appendChild(numWrongAnswers);
+//
+//
+// }
 
 MultipleChoice.prototype.renderTitle = function() {
   var self = this;

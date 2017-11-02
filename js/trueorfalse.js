@@ -1,11 +1,12 @@
 'use strict';
 
-function TrueOrFalse (data, questionIndex, parentElement) {
+function TrueOrFalse(data, headerElement, scoreElement, parentElement) {
   var self = this;
 
     self.data = data;
     self.parentElement = parentElement;
-    self.currentQuestionIndex = questionIndex;
+    self.headerContainer = headerElement;
+    self.scoreDiv = scoreElement;
 
     self.title = null;
     self.question = null;
@@ -13,75 +14,54 @@ function TrueOrFalse (data, questionIndex, parentElement) {
 
     self.userAnswer = null;
 
-    self.headerContainer = null;
-    self.scoreDiv = null;
 
-    self.renderHeader();
-    self.renderScore();
-    self.renderTitle();
-    self.renderQuestion();
-    self.renderAnswer();
+    self.initQuestion();
 }
+
+
+TrueOrFalse.prototype.initQuestion = function() {
+  var self = this;
+
+  self.renderTitle();
+  self.renderQuestion();
+  self.renderAnswer();
+};
 
 TrueOrFalse.prototype.bindAnswer = function(callback) {
   var self = this;
   self.callback = callback;
 };
 
-TrueOrFalse.prototype.renderHeader = function () {
-  var self = this;
 
-  self.headerContainer = document.createElement('header');
-  self.headerContainer.id = 'header-container';
-  self.parentElement.appendChild(self.headerContainer)
-
-  var currentQuestionDiv = document.createElement('div');
-  currentQuestionDiv.id = 'current-question';
-  self.headerContainer.appendChild(currentQuestionDiv);
-  var currentQuestionNumber = document.createElement('p');
-  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / 3`;
-  currentQuestionDiv.appendChild(currentQuestionNumber);
-
-  var pointsDiv = document.createElement('div');
-  pointsDiv.id = 'points-container';
-  self.headerContainer.appendChild(pointsDiv);
-  var winningPoints = document.createElement('p');
-  winningPoints.innerText = `Winnings: ${self.data.points}`;
-  pointsDiv.appendChild(winningPoints);
-  var lossesPoints = document.createElement('div');
-  lossesPoints.innerText += `Losses: ${self.data.points + 2}`;
-  pointsDiv.appendChild(lossesPoints);
-}
-
-TrueOrFalse.prototype.renderScore = function () {
-  var self = this;
-
-  self.scoreDiv = document.createElement('div');
-  self.scoreDiv.id = 'score';
-  self.parentElement.appendChild(self.scoreDiv);
-
-  var wrongAnswers = document.createElement('div');
-  wrongAnswers.id = 'wrong-answers';
-  self.scoreDiv.appendChild(wrongAnswers);
-  var numWrongAnswers = document.createElement('p');
-  numWrongAnswers.innerText = 'X';
-  wrongAnswers.appendChild(numWrongAnswers);
-
-  var totalScoreDiv = document.createElement('div');
-  totalScoreDiv.id = 'total-score';
-  totalScoreDiv.innerText = 'YOUR SCORE'
-  self.scoreDiv.appendChild(totalScoreDiv);
-
-
-  var correctAnswers = document.createElement('div');
-  correctAnswers.id = 'correct-answers';
-  self.scoreDiv.appendChild(correctAnswers);
-  var numWrongAnswers = document.createElement('p');
-  numWrongAnswers.innerText = 'C';
-  correctAnswers.appendChild(numWrongAnswers);
-
-
-}
+// TrueOrFalse.prototype.renderScore = function () {
+//   var self = this;
+//
+//   self.scoreDiv = document.createElement('div');
+//   self.scoreDiv.id = 'score';
+//   self.parentElement.appendChild(self.scoreDiv);
+//
+//   var wrongAnswers = document.createElement('div');
+//   wrongAnswers.id = 'wrong-answers';
+//   self.scoreDiv.appendChild(wrongAnswers);
+//   var numWrongAnswers = document.createElement('p');
+//   numWrongAnswers.innerText = 'X';
+//   wrongAnswers.appendChild(numWrongAnswers);
+//
+//   var totalScoreDiv = document.createElement('div');
+//   totalScoreDiv.id = 'total-score';
+//   totalScoreDiv.innerText = `YOUR SCORE: ${self.totalScore}`;
+//   self.scoreDiv.appendChild(totalScoreDiv);
+//
+//
+//   var correctAnswers = document.createElement('div');
+//   correctAnswers.id = 'correct-answers';
+//   self.scoreDiv.appendChild(correctAnswers);
+//   var numWrongAnswers = document.createElement('p');
+//   numWrongAnswers.innerText = `C: ${self.rightAnswers}`;
+//   correctAnswers.appendChild(numWrongAnswers);
+//
+//
+// }
 
 TrueOrFalse.prototype.renderTitle = function () {
   var self = this;
@@ -134,8 +114,20 @@ TrueOrFalse.prototype.handleAnswerClick = function (event) {
   button.classList.toggle('active');
   self.userAnswer = event.currentTarget.innerText;
 
+
+
   function getResult () {
-    return self.userAnswer === self.data.solution;
+    if (self.userAnswer === self.data.solution) {
+      self.totalScore += self.data.points;
+      self.rightAnswers += 1;
+
+      return true;
+    } else {
+      self.totalScore -= self.data.points + 2;
+      self.wrongAnswers += 1;
+
+      return false;
+    }
   }
 
   self.callback(getResult());
@@ -146,9 +138,9 @@ TrueOrFalse.prototype.handleAnswerClick = function (event) {
 
 TrueOrFalse.prototype.destroy = function () {
   var self = this;
-
-  self.parentElement.removeChild(self.headerContainer);
+  
   self.parentElement.removeChild(self.scoreDiv);
+  self.parentElement.removeChild(self.headerContainer);
   self.parentElement.removeChild(self.title);
   self.parentElement.removeChild(self.question);
   self.parentElement.removeChild(self.answers);
