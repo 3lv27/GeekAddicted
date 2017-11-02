@@ -14,8 +14,10 @@ function TrueOrFalse (data, questionIndex, parentElement) {
     self.userAnswer = null;
 
     self.headerContainer = null;
+    self.scoreDiv = null;
 
     self.renderHeader();
+    self.renderScore();
     self.renderTitle();
     self.renderQuestion();
     self.renderAnswer();
@@ -51,7 +53,35 @@ TrueOrFalse.prototype.renderHeader = function () {
   pointsDiv.appendChild(lossesPoints);
 }
 
+TrueOrFalse.prototype.renderScore = function () {
+  var self = this;
 
+  self.scoreDiv = document.createElement('div');
+  self.scoreDiv.id = 'score';
+  self.parentElement.appendChild(self.scoreDiv);
+
+  var wrongAnswers = document.createElement('div');
+  wrongAnswers.id = 'wrong-answers';
+  self.scoreDiv.appendChild(wrongAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = 'X';
+  wrongAnswers.appendChild(numWrongAnswers);
+
+  var totalScoreDiv = document.createElement('div');
+  totalScoreDiv.id = 'total-score';
+  totalScoreDiv.innerText = 'YOUR SCORE'
+  self.scoreDiv.appendChild(totalScoreDiv);
+
+
+  var correctAnswers = document.createElement('div');
+  correctAnswers.id = 'correct-answers';
+  self.scoreDiv.appendChild(correctAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = 'C';
+  correctAnswers.appendChild(numWrongAnswers);
+
+
+}
 
 TrueOrFalse.prototype.renderTitle = function () {
   var self = this;
@@ -118,6 +148,7 @@ TrueOrFalse.prototype.destroy = function () {
   var self = this;
 
   self.parentElement.removeChild(self.headerContainer);
+  self.parentElement.removeChild(self.scoreDiv);
   self.parentElement.removeChild(self.title);
   self.parentElement.removeChild(self.question);
   self.parentElement.removeChild(self.answers);

@@ -13,10 +13,12 @@ function MultipleChoice(data, questionIndex, parentElement) {
   self.answers = null;
   self.submit = null;
   self.headerContainer = null;
+  self.scoreDiv = null;
 
   self.userAnswer = [];
 
   self.renderHeader();
+  self.renderScore();
   self.renderTitle();
   self.renderQuestion();
   self.renderAnswer();
@@ -51,6 +53,36 @@ MultipleChoice.prototype.renderHeader = function () {
   var lossesPoints = document.createElement('div');
   lossesPoints.innerText += `Losses: ${self.data.points + 2}`;
   pointsDiv.appendChild(lossesPoints);
+
+}
+
+MultipleChoice.prototype.renderScore = function () {
+  var self = this;
+
+  self.scoreDiv = document.createElement('div');
+  self.scoreDiv.id = 'score';
+  self.parentElement.appendChild(self.scoreDiv);
+
+  var wrongAnswers = document.createElement('div');
+  wrongAnswers.id = 'wrong-answers';
+  self.scoreDiv.appendChild(wrongAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = 'X';
+  wrongAnswers.appendChild(numWrongAnswers);
+
+  var totalScoreDiv = document.createElement('div');
+  totalScoreDiv.id = 'total-score';
+  totalScoreDiv.innerText = 'YOUR SCORE'
+  self.scoreDiv.appendChild(totalScoreDiv);
+
+
+  var correctAnswers = document.createElement('div');
+  correctAnswers.id = 'correct-answers';
+  self.scoreDiv.appendChild(correctAnswers);
+  var numWrongAnswers = document.createElement('p');
+  numWrongAnswers.innerText = 'C';
+  correctAnswers.appendChild(numWrongAnswers);
+
 
 }
 
@@ -148,6 +180,7 @@ MultipleChoice.prototype.renderSubmit = function() {
 MultipleChoice.prototype.destroy = function () {
   var self = this;
 
+  self.parentElement.removeChild(self.scoreDiv);
   self.parentElement.removeChild(self.headerContainer);
   self.parentElement.removeChild(self.title);
   self.parentElement.removeChild(self.question);
