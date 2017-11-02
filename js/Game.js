@@ -13,7 +13,7 @@ function Game(parentElement, questions) {
   self.timeOutInterval = null;
 
   // @todo increment score
-  // @todo timer
+
 
 }
 
@@ -222,6 +222,9 @@ Game.prototype.endGame = function () {
   var self = this;
 
   clearInterval(self.timeOutInterval);
+
+  // var headerContainer = document.getElementById('header-container');
+  // self.parentElement.removeChild(headerContainer);
 
   var endScreen = document.createElement('div');
   endScreen.id = 'endScreen';

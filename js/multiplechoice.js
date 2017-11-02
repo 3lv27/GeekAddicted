@@ -12,6 +12,7 @@ function MultipleChoice(data, questionIndex, parentElement) {
   self.question = null;
   self.answers = null;
   self.submit = null;
+  self.headerContainer = null;
 
   self.userAnswer = [];
 
@@ -30,16 +31,27 @@ MultipleChoice.prototype.bindAnswer = function(callback) {
 MultipleChoice.prototype.renderHeader = function () {
   var self = this;
 
-  var headerContainer = document.createElement('header');
-  headerContainer.id = 'header-container';
-  self.parentElement.appendChild(headerContainer)
+  self.headerContainer = document.createElement('header');
+  self.headerContainer.id = 'header-container';
+  self.parentElement.appendChild(self.headerContainer)
 
   var currentQuestionDiv = document.createElement('div');
   currentQuestionDiv.id = 'current-question';
-  headerContainer.appendChild(currentQuestionDiv);
+  self.headerContainer.appendChild(currentQuestionDiv);
   var currentQuestionNumber = document.createElement('p');
-  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / ${self.data.length}`;
+  currentQuestionNumber.innerText = `${self.currentQuestionIndex + 1} / 3`;
   currentQuestionDiv.appendChild(currentQuestionNumber);
+
+  var pointsDiv = document.createElement('div');
+  pointsDiv.id = 'points-container';
+  self.headerContainer.appendChild(pointsDiv);
+  var winningPoints = document.createElement('p');
+  winningPoints.innerText = `Winnings: ${self.data.points}`;
+  pointsDiv.appendChild(winningPoints);
+  var lossesPoints = document.createElement('div');
+  lossesPoints.innerText += `Losses: ${self.data.points + 2}`;
+  pointsDiv.appendChild(lossesPoints);
+
 }
 
 MultipleChoice.prototype.renderTitle = function() {
@@ -136,6 +148,7 @@ MultipleChoice.prototype.renderSubmit = function() {
 MultipleChoice.prototype.destroy = function () {
   var self = this;
 
+  self.parentElement.removeChild(self.headerContainer);
   self.parentElement.removeChild(self.title);
   self.parentElement.removeChild(self.question);
   self.parentElement.removeChild(self.answers);
