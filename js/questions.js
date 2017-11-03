@@ -33,7 +33,7 @@ var questions = [
     title:'True or False',
     level: 1,
     points: 6,
-    question: 'Are JS Object Oriented?',
+    question: 'Is JS Object Oriented?',
     options: ['True', 'False'],
     solution: 'True'
   },
@@ -42,7 +42,7 @@ var questions = [
   title:'Select the correct ones',
   level: 3,
   points: 8,
-  question: 'Which of these type of values does not exist in JS?',
+  question: 'Which of these type of values exists in JS?',
   options: ['Boolean', 'Number', 'String', 'Double'],
   solution: ['Boolean', 'Number', 'String']
 }
