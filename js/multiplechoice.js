@@ -95,7 +95,7 @@ MultipleChoice.prototype.renderTitle = function() {
   self.title.id = 'title';
 
   var titleText = document.createElement('h2');
-  titleText.innerText = self.data.title;
+  titleText.innerText = `- ${self.data.title} -`;
   self.title.appendChild(titleText);
   self.parentElement.appendChild(self.title);
 };
@@ -116,7 +116,7 @@ MultipleChoice.prototype.renderAnswer = function() {
   var self = this;
 
   self.answers = document.createElement('div');
-  self.answers.classList.add('answers');
+  self.answers.classList.add('answers-multiple');
   self.parentElement.appendChild(self.answers);
 
 
@@ -124,6 +124,7 @@ MultipleChoice.prototype.renderAnswer = function() {
 
     var button = document.createElement('button');
     button.innerText = self.data.options[index];
+    button.classList.add('multiple-btn');
     self.answers.appendChild(button);
 
     button.addEventListener('click', function(event) {
@@ -154,7 +155,7 @@ MultipleChoice.prototype.renderSubmit = function() {
   self.parentElement.appendChild(self.submit);
   var submitBtn = document.createElement('button');
   submitBtn.id = 'submit-btn';
-  submitBtn.innerText = 'submit';
+  submitBtn.innerText = 'SUBMIT';
   self.submit.appendChild(submitBtn);
 
   function getResult () {

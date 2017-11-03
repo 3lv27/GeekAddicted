@@ -27,5 +27,23 @@ var questions = [
     question: 'How do you declare a function in Javascript?',
     options: ['function foo()', 'function = foo()', 'function: foo()'],
     solution: 'function foo()'
-  }
+  },
+  {
+    type: 'TrueFalse',
+    title:'True or False',
+    level: 1,
+    points: 6,
+    question: 'Are JS Object Oriented?',
+    options: ['True', 'False'],
+    solution: 'True'
+  },
+  {
+  type: 'MultipleChoice',
+  title:'Select the correct ones',
+  level: 3,
+  points: 8,
+  question: 'Which of these type of values does not exist in JS?',
+  options: ['Boolean', 'Number', 'String', 'Double'],
+  solution: ['Boolean', 'Number', 'String']
+}
 ];

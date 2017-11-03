@@ -1,9 +1,10 @@
-.answers {
-  height: 200px;
+.answers-multiple {
+  height: 46%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .answers>button {
@@ -11,7 +12,68 @@
 
 }
 
-.active {
-  background-color: blue;
-  color: white;
+.multiple-btn:hover {
+  color: #00FFEA;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-style: none;
+  border: solid #00FFEA 1px;
+  font-size: 90%;
+  background: none;
+  margin-top: 15px;
+  width: 57%;
+  height: 18%
+}
+
+ .multiple-btn.active {
+    color: #00FFEA;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-style: none;
+    border: solid #00FFEA 1px;
+    font-size: 90%;
+    background: none;
+    margin-top: 15px;
+    width: 57%;
+    height: 18%;
+
+}
+
+
+.multiple-btn {
+  color: #ff5f5e;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 4px;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  font-size: 90%;
+  background: none;
+  margin-top: 15px;
+  width: 57%;
+  height: 18%;
+
+}
+
+
+#submit {
+  height: 18%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#submit-btn {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 4px;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  font-size: 90%;
+  background: #ff5f5e;
+  width: 57%;
+  height: 40%;
 }

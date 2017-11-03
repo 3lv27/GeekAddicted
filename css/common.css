@@ -15,35 +15,212 @@ body {
 
 /* -- temp -- */
 
-div, header, footer {
-  border: 1px solid black;
-}
+/*div, header, footer {
+  border: 1px solid white;
+}*/
+
+/*
+
+verde: #00FFEA;
+azul : #198BFF;
+linear-gradient(to bottom, rgba(25,140,255,1) 0%, rgba(0,255,234,1) 100%);
+
+letters #2ad0f2
+
+ff5f5e salmon
+
+*/
+
 
 /*--main css--*/
 
+/*#header-container, #score, #gamename, #endScreen, #result #start-btn {
+  font-family: 'Nunito', sans-serif;
+}*/
+
 body {
-  font-family: 'Varela-Round', sans-serif;
+  color: #ff5f5e;
+  background: #000;
+  font-family: 'Lato', sans-serif;
+
+}
+
+#game-container {
+  height: 660px;
 }
 
 #start {
   text-align: center;
+  margin: 60px 0 60px 0;
+  padding: 30px 0 30px 0;
 }
 
 #gamename {
   text-align: center;
 }
 
+#gamename h1 {
+  font-size: 45px;
+  padding: 60px 0 60px 0;
+}
+
+#current-question {
+  position: relative;
+  top: 7px;
+  color: #fff;
+}
+
+#correct-answers{
+  margin: 10px 0 0 20px;
+}
+
+#wrong-answers {
+  margin: 10px 20px 0 0;
+
+}
+
+#correct-answers>p {
+  color: #00FFEA;
+  display: inline-block;
+}
+
+ #wrong-answers>p {
+  color: #FFF337;
+  display: inline-block;
+
+ }
+
+.btn-asw {
+  color: #ff5f5e;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  font-size: 90%;
+  background: none;
+}
+
+.btn-start, .btn-playagain {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 105%;
+  background: #ff5f5e;
+  padding: 4% 23%;
+}
+
+.btn-playagain {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  border-style: none;
+  border: solid #ff5f5e 1px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  font-size: 105%;
+  background: #ff5f5e;
+  padding: 4% 10%;
+  margin: 68px;
+}
+
+.answers {
+  display: flex;
+  flex: column;
+  justify-content: space-around;
+}
+
 #header-container, #score {
   display: flex;
-  flex: row;
+  flex-direction: row;
   justify-content: space-between;
 }
 
-#title h2 {
+#header-container {
+  margin-top: 17px;
+
+}
+
+#winning-points {
+  border: 2px solid #00FFEA;
+  margin-left: 7px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 5px;
+}
+
+#winning-points p:first-child {
+  color: #00FFEA;
+  font-weight: bold;
   font-size: 15px;
 }
 
+#winning-points p {
+  font-size: 11px;
+  color: #fff;
+}
+
+
+
+#losses-points {
+  border: 2px solid #FFF337;
+  margin-right: 7px;
+  border-radius: 7px;
+  text-align: center;
+  padding: 5px;
+}
+
+#losses-points p:first-child {
+  color: #FFF337;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#losses-points p {
+  font-size: 11px;
+  color: #fff;
+}
+
+
+
+
+#score {
+  font-size: 20px;
+  margin-top: 17px;
+}
+
+#total-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+
+#title h2 {
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+  margin: 17px 0 2px 0;
+  font-weight: bold;
+  color: #00FFEA;
+}
+
+#question h3 {
+  text-align: center;
+  margin-top: 18px;
+  font-weight: bold;
+}
+
 #failed {
+  margin-top: 35%;
   height: 270px;
   display: flex;
   background-size: cover;
@@ -53,6 +230,7 @@ body {
 }
 
 #succeed {
+  margin-top: 35%;
   height: 380px;
   display: flex;
   background-size: cover;
@@ -61,9 +239,47 @@ body {
   background-image: url("../img/right-oldman.gif");
 }
 
+#result {
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 30px;
+  margin-top: 50px;
+}
+
 
 .timer-bar {
-  height: 20px;
+  height: 6px;
   width: 100%;
-  background-color: #44d6fa;
+  background-color: #00FFEA;
+  margin: 17px 0 17px 0;
+}
+
+
+#endScreen {
+  text-align: center;
+  color: #FFF337;
+  font-size: 46px;
+  margin-top: 40px;
+}
+
+#resum-screen {
+  background: #000;
+  height: 415px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+#resum-right {
+  position: relative;
+  top: 20px;
+}
+
+#resum-total {
+  position: relative;;
+  bottom: 20px;
 }

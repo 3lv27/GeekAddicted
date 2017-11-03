@@ -70,7 +70,7 @@ TrueOrFalse.prototype.renderTitle = function () {
   self.title.id = 'title';
 
   var titleText = document.createElement('h2');
-  titleText.innerText = self.data.title;
+  titleText.innerText = `- ${self.data.title} -`;
   self.title.appendChild(titleText);
   self.parentElement.appendChild(self.title);
 };
@@ -91,13 +91,14 @@ TrueOrFalse.prototype.renderAnswer = function () {
   var self = this;
 
   self.answers = document.createElement('div');
-  self.answers.classList.add('answers');
+  self.answers.classList.add('answers-true');
   self.parentElement.appendChild(self.answers);
 
   for (var i = 0; i < self.data.options.length; i++) {
 
     var button = document.createElement('button');
     button.innerText = self.data.options[i];
+    button.classList.add('true-btn');
     self.answers.appendChild(button);
 
     button.addEventListener('click', function(event) {
@@ -138,7 +139,7 @@ TrueOrFalse.prototype.handleAnswerClick = function (event) {
 
 TrueOrFalse.prototype.destroy = function () {
   var self = this;
-  
+
   self.parentElement.removeChild(self.scoreDiv);
   self.parentElement.removeChild(self.headerContainer);
   self.parentElement.removeChild(self.title);
